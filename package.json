@@ -1,0 +1,15 @@
+{
+  "name": "cubapack-service",
+  "version": "1.0.0",
+  "description": "Cubapack micro service",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Rolando Betancourt",
+  "license": "MIT",
+  "dependencies": {
+    "graphql": "^15.0.0"
+  }
+}

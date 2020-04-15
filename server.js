@@ -7,7 +7,7 @@ const server = http.createServer((req, res) => {
 
 //console.log(process.env);
 
-const hostname = '127.0.0.1';
+const hostname = 'https://cubapack-service.herokuapp.com/';
 
 const port = process.env.PORT || 5000;
 

@@ -7,11 +7,11 @@ const server = http.createServer((req, res) => {
 
 //console.log(process.env);
 
-const hostname = 'https://cubapack-service.herokuapp.com/';
+//const hostname = 'https://cubapack-service.herokuapp.com/';
 
 const port = process.env.PORT || 5000;
 
-server.listen(port, hostname, ()=> {
+server.listen(port, ()=> {
     console.log('listening here');
 });
 

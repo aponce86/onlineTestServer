@@ -5,7 +5,7 @@ const server = http.createServer((req, res) => {
     res.end('tito loko');
 });
 
-console.log(process.env);
+//console.log(process.env);
 
 const hostname = '127.0.0.1';
 

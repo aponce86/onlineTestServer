@@ -213,3 +213,252 @@ exports.createPackage = (async (req, res, next) => {
         itemsResult: itemsResult
     });
 });
+
+exports.doc = (req, res, next) => {
+
+    const doc = `
+        <html>
+        <head>
+            <title> Cubapack Service Doc </title>
+
+            <style>
+                p {
+                    margin-left: 20px;
+                }
+
+                .space {
+                    margin-left: 20px;
+                }
+            </style>
+        </head>
+            <body>
+                <h1> Cubapack Micro-Service Documentation </h1>
+
+                <h2> Endpoint </h2>
+
+                <p> <b> URL: </b> https://cubapack-service.herokuapp.com/api/v2/package
+                <p> <b> Http method: </b> POST
+
+                <p> <b> Payload: </b> { PackageType, items, shipper, consignee }
+
+                <br>
+                <h2> Authentication </h2>
+
+                <p> This service implement  <b> Basic Authentication Scheme </b>  which transmits credentials as email / password pairs, encoded using base64.
+                Each request must include this authorization token in their headers otherwise the request will be rejected.
+
+                <p> Example:
+
+                <p> Having the next credentials, email: <b> example@gmail.com </b> password: <b> mystrongpassword </b> we need to concat <b> email:password </b> after that we need to encode them to base64 and concat the result with the word <b> Basic </b>
+
+                <p> <b> example@gmail.com:mystrongpassword </b> to base64 is equal to <b> ZXhhbXBsZUBnbWFpbC5jb206bXlzdHJvbmdwYXNzd29yZA== </b>
+
+                <p> After that we cancat the word Basic: <b> Basic ZXhhbXBsZUBnbWFpbC5jb206bXlzdHJvbmdwYXNzd29yZA== </b> and put them in the headers using the authorization scheme
+
+                <p> <b> Authorization: Basic ZXhhbXBsZUBnbWFpbC5jb206bXlzdHJvbmdwYXNzd29yZA== </b>
+
+                <p> Use this online tool to encode your credentials to base64: <a href="https://www.blitter.se/utils/basic-authentication-header-generator/"> https://www.blitter.se/utils/basic-authentication-header-generator/ </a>
+            
+                <br>
+                <h2> Request payload </h2>
+
+                <p> The payload must have 4 attributes
+
+                <ul>
+                    <li> <b> packageType </b> </li>
+                    <li> <b> items </b> </li>
+                    <li> <b> shipper </b> </li>
+                    <li> <b> consignee </b> </li>
+                </ul>
+
+                
+                <p> <b> packageType: </b> This param is an string with two possibles values: <b> E.N.A </b> or <b> Paqueteria </b>. If this attribute is missing or has different value the server response with an error {code:400, msg:'...'} 
+            
+                <p> Example: { packageType: 'E.N.A' } 
+
+                <p> <b> items: </b> This param is an array of objects, each object contains 3 attributes and these attributes describe a package.
+                <ul>
+                    <li> <b> description: </b> String </li>
+                    <li> <b> weight: </b> Number </li>
+                    <li> <b> salePrice: </b> Number </li>
+                </ul>
+
+                <p> Example: 
+                <b> items: </b> [
+                    {
+                       <b> description: </b> 'My first package description',
+                       <b> weight: </b> 34.5,
+                       <b> salePrice: </b> 60.2
+                    },
+                    {
+                       <b> description: </b> 'My second package description',
+                       <b> weight: </b> 10.5,
+                       <b> salePrice: </b> 20.8
+                    }
+                ]
+
+                <p> <b> shipper: </b> This param contains information about the person who sends packages to Cuba. Contains 7 attributes as shown below.
+
+                <ul>
+                    <li> <b> name: </b> String </li>
+                    <li> <b> lastName: </b> String </li>
+                    <li> <b> phone: </b> String </li>
+                    <li> <b> address: </b> String </li>
+                    <li> <b> city: </b> String </li>
+                    <li> <b> zipCode: </b> String </li>
+                    <li> <b> state: </b> String </li>
+                </ul>
+
+                <p> Example: 
+
+               <b> shipper: </b> {
+                   <b> name: </b> 'Rolando',
+                   <b> lastName: </b> 'Betancourt',
+                   <b> phone: </b> '786-456-2345',
+                   <b> address: </b> '2950 w 5 ave',
+                   <b> city: </b> 'HIALEAH',
+                   <b> zipCode: </b> '33014',
+                   <b> state: </b> 'Florida',
+                  }
+
+                <p> <b> consignee: </b> This param contains information about the person who receive the package in Cuba. Contains 13 attributes as shown below.
+                
+                <ul>
+                    <li> <b> name: </b> String </li>
+                    <li> <b> lastName: </b> String </li>
+                    <li> <b> ci: </b> String </li>
+                    <li> <b> passport: </b> String </li>
+                    <li> <b> phone: </b> String </li>
+                    <li> <b> homePhone: </b> String </li>
+                    <li> <b> street: </b> String </li>
+                    <li> <b> houseNumber: </b> String </li>
+                    <li> <b> between: </b> String </li>
+                    <li> <b> apartment: </b> String </li>
+                    <li> <b> neighborhood: </b> String </li>
+                    <li> <b> province: </b> String </li>
+                    <li> <b> municipality: </b> String </li>
+                </ul>
+
+                <p> Example: 
+
+                <b>consignee: </b> {
+                   <b> name: </b> 'Zuniet',
+                   <b> lastName: </b> 'Santiesteban',
+                   <b> ci: </b> '93040712121',
+                   <b> passport: </b> 'K67677',
+                   <b> phone: </b> '53290190',
+                   <b> homePhone: </b> '',
+                   <b> street: </b> 'Princesa',
+                   <b> houseNumber: </b> '#155',
+                   <b> between: </b> '% Calvo y Soubervilles',
+                   <b> apartment: </b> '',
+                   <b> neighborhood: </b> '',
+                   <b> province: </b> 'Matanzas',
+                   <b> municipality: </b> 'Cárdenas',
+                  }
+
+                <h2> Validations </h2>
+
+                <p> You must provide the <b>basic authorization token</b> in the headers as described earlier in this article.
+                
+                <p> Attributes can't be <b>null</b> or <b>undefined</b>, use ( <b>0</b> ) or ( <b>" "</b> ) instead
+                
+                <p> The attribute <b> packageType </b> can only take two possible values ( <b> 'E.N.A' </b> or <b> 'Paqueteria' </b> )
+
+                <p> When the attribute <b> packageType == 'E.N.A' </b> then shipper and consignee must be the same person.
+
+                <p> When the attribute <b> packageType == 'E.N.A' </b> then the consignee passport attribute can't be an empty string. 
+
+                <p> When the attribute <b> packageType == 'Paqueteria' </b> then shipper and consignee must be different person.
+
+                <h2> Server response </h2>
+
+                <p> <b> Success: </b>
+
+                <p> If success the server response with two arrays, the items and packages created. [ code: 201 ]
+
+                
+
+                <p> Example: { <b>itemsResult: [...]</b>, <b>packagesResult: [...]</b> }
+
+               
+                <p> <b> Failure: </b>
+
+                <p> If failure the server response with an object with differents attributes related with the error. [code: 400, 401, 500]
+                
+                <p> Example: { <b>error:</b> { <b>msg:</b> {...} }, <b>status:</b> 400, ... }
+
+                <p> <b>msg</b> attribute contains custom error details.
+
+                <h2> Make an HTTP POST request using Angular </h2>
+
+                <p> You can use the <b>authorization token</b> in the above example to create package and test your implementation.
+
+                <br>
+                <p>&nbsp;
+                <p>
+
+                <code>
+
+  createPackage(): Observable <any> {
+
+   <br> &nbsp; const headers = new HttpHeaders({
+    <br>  &nbsp;&nbsp; Authorization: 'Basic cm9sYW5kbzA5MDJAZ21haWwuY29tOldjUmJUIzEz'
+   <br>&nbsp; });
+
+   <p>&nbsp; return this.http.post('https://cubapack-service.herokuapp.com/api/v2/package', {
+    <br>&nbsp;&nbsp;  packageType: 'Paqueteria',
+
+   <p>&nbsp;&nbsp;   items: [
+    <br> &nbsp;&nbsp;&nbsp;   {
+      <br>  &nbsp;&nbsp;&nbsp;&nbsp;  description: 'Freidora',
+       <br> &nbsp;&nbsp;&nbsp;&nbsp;  weight: 20,
+        <br> &nbsp;&nbsp;&nbsp;&nbsp; salePrice: 39.8
+      <br> &nbsp;&nbsp;&nbsp; },
+      <br> &nbsp;&nbsp;&nbsp; {
+        <br> &nbsp;&nbsp;&nbsp;&nbsp; description: 'Bicicleta',
+        <br> &nbsp;&nbsp;&nbsp;&nbsp; weight: 33,
+        <br> &nbsp;&nbsp;&nbsp;&nbsp; salePrice: 65.67
+      <br> &nbsp;&nbsp;&nbsp; }
+     <br> &nbsp;&nbsp; ],
+
+    <p> &nbsp;&nbsp;  consignee: {
+      <br> &nbsp;&nbsp;&nbsp; name: 'Zuniet',
+      <br> &nbsp;&nbsp;&nbsp; lastName: 'Santiesteban',
+      <br> &nbsp;&nbsp;&nbsp; ci: '93040712121',
+      <br> &nbsp;&nbsp;&nbsp; passport: 'K67677',
+      <br> &nbsp;&nbsp;&nbsp; phone: '53190720',
+      <br> &nbsp;&nbsp;&nbsp; homePhone: '',
+      <br> &nbsp;&nbsp;&nbsp; street: 'Princesa',
+      <br> &nbsp;&nbsp;&nbsp; houseNumber: '#155',
+      <br> &nbsp;&nbsp;&nbsp; between: '% Calvo y Soubervilles',
+      <br> &nbsp;&nbsp;&nbsp; apartment: '',
+      <br> &nbsp;&nbsp;&nbsp; neighborhood: '',
+      <br> &nbsp;&nbsp;&nbsp; province: 'Matanzas',
+      <br> &nbsp;&nbsp;&nbsp; municipality: 'Cárdenas',
+    <br> &nbsp;&nbsp; },
+      
+    <p> &nbsp;&nbsp; shipper: {
+      <br> &nbsp;&nbsp;&nbsp; name: 'Rolando',
+      <br> &nbsp;&nbsp;&nbsp; lastName: 'Betancourt',
+      <br> &nbsp;&nbsp;&nbsp; phone: '7864405007',
+      <br> &nbsp;&nbsp;&nbsp; address: '3920 w 6 ave',
+      <br> &nbsp;&nbsp;&nbsp; city: 'HIALEAH',
+      <br> &nbsp;&nbsp;&nbsp; zipCode: '33014',
+      <br> &nbsp;&nbsp;&nbsp; state: 'Florida',
+    <br> &nbsp;&nbsp; }
+   <br> &nbsp;&nbsp;}, { 
+      <br> &nbsp;&nbsp;&nbsp; headers 
+   <br>&nbsp; });
+
+ <br> }
+
+  </code>
+
+            </body>
+        </html>
+    
+    `;
+
+    res.status(200).send(doc);
+};

@@ -18,8 +18,6 @@ app.use((req, res, next) => {
       "GET, POST"
     );
   
-    //console.log('*** - ', req.body);
-  
     next();
   });
 

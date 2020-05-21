@@ -32,6 +32,7 @@ exports.createInvoice = asyncHandler(async (req, res, next) => {
   //console.log(req.body.packages);
 
   console.log('Package size *******');
+  console.log(req.body.packages);
   console.log(req.body.packages.length);
 
   //console.log( JSON.parse(req.body.packages));

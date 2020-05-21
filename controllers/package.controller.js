@@ -216,6 +216,8 @@ exports.createPackage = (async (req, res, next) => {
 
 exports.doc = (req, res, next) => {
 
+  console.log(Item);
+
     const doc = `
         <html>
         <head>

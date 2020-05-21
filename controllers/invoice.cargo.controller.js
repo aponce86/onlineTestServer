@@ -66,7 +66,7 @@ exports.createInvoice = asyncHandler(async (req, res, next) => {
 
 
         ////////////////////////////////////////////////////
-        console.log(itemPartNumbersMap);
+        //console.log(itemPartNumbersMap);
         //let itemPartNumbersMap = JSON.parse(req.body.codes);
 
         let items = await ItemCargo.findAll({
@@ -104,16 +104,16 @@ exports.createInvoice = asyncHandler(async (req, res, next) => {
         }
 
 
-        console.log('******************');
-        console.log(itemPartNumbersMap);
-        console.log(resultMap);
+        //console.log('******************');
+        //console.log(itemPartNumbersMap);
+        //console.log(resultMap);
 
 
 
         if (Object.keys(resultMap).length !== Object.keys(itemPartNumbersMap).length) {
 
 
-          console.log('Invalid asdads');
+          //console.log('Invalid asdads');
 
           resultList.push({ invalid: 'Invalid Product' });
           //return res.status(200).json({ invalid: 'Invalid Product' });
@@ -128,9 +128,9 @@ exports.createInvoice = asyncHandler(async (req, res, next) => {
         if (!Object.values(resultMap).some(v => v.count > v.available)) {
 
           // TODO: complete invoice creation here
-          console.log('can create invoice');
-          console.log(resultMap);
-          console.log('************************** loko    *******');
+          //console.log('can create invoice');
+          //console.log(resultMap);
+          //console.log('************************** loko    *******');
 
           //console.log(items);
 
@@ -184,7 +184,7 @@ exports.createInvoice = asyncHandler(async (req, res, next) => {
 
           let invoiceItems = [];
 
-          console.log(resultMap);
+          //console.log(resultMap);
 
           items.map(v => {
             invoiceItems.push({
@@ -214,11 +214,11 @@ exports.createInvoice = asyncHandler(async (req, res, next) => {
           }
 
           //console.log(itemsSub.map(v => { v.dataValues.id, v.dataValues.itemPartNumber }));
-          console.log(itemPartNumbersMap);
-          console.log(itemExistingMap);
-          console.log(resultMap);
-          console.log(itemLocationMap);
-          console.log(itemSUbsiduary);
+         // console.log(itemPartNumbersMap);
+         // console.log(itemExistingMap);
+         // console.log(resultMap);
+         // console.log(itemLocationMap);
+         // console.log(itemSUbsiduary);
 
           for (let [k, v] of Object.entries(itemSUbsiduary)) {
             //console.log(k);
@@ -230,7 +230,7 @@ exports.createInvoice = asyncHandler(async (req, res, next) => {
               where: { id: k }
             });
 
-            console.log(result);
+          //  console.log(result);
           }
 
          
@@ -244,7 +244,7 @@ exports.createInvoice = asyncHandler(async (req, res, next) => {
 
         } else {
 
-          console.log('Out of stock adsda sdasdasd');
+         // console.log('Out of stock adsda sdasdasd');
 
 
           let outOfStock = [];
@@ -261,7 +261,7 @@ exports.createInvoice = asyncHandler(async (req, res, next) => {
             }
           });
 
-          console.log(outOfStock);
+         // console.log(outOfStock);
 
           resultList.push({ out: outOfStock, noPackage: packages[index].noPackage })
           //return res.status(200).json({ out: outOfStock, noPackage: packages[index].noPackage });
@@ -276,7 +276,7 @@ exports.createInvoice = asyncHandler(async (req, res, next) => {
 
       } else {
         resultList.push({hasInvoice: 'This package already has an invoice'});
-          console.log('has invoice');
+        //  console.log('has invoice');
       }
 
 
@@ -284,7 +284,7 @@ exports.createInvoice = asyncHandler(async (req, res, next) => {
 
     } else {
       resultList.push({isAmazon: 'This package already has an amazon invoice'});
-        console.log('amazon package ');
+       // console.log('amazon package ');
     }
 
 

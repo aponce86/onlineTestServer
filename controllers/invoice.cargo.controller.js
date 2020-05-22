@@ -32,7 +32,7 @@ exports.createInvoice = asyncHandler(async (req, res, next) => {
   //console.log(req.body.packages);
 
   console.log('Package size *******');
-  console.log(req.body.packages);
+  //console.log(req.body.packages);
   console.log(req.body.packages.length);
 
   //console.log( JSON.parse(req.body.packages));
@@ -48,12 +48,16 @@ exports.createInvoice = asyncHandler(async (req, res, next) => {
 
 
 
+
     if (packages[index].product && packages[index].product.scannedBarCode) {
 
 
       if (packages[index].amazonOrd === '') {
 
         itemPartNumberScanned = packages[index].product.scannedBarCode.split('\n');
+
+
+        console.log(itemPartNumberScanned);
 
         let itemPartNumbersMap = {};
 
@@ -65,6 +69,11 @@ exports.createInvoice = asyncHandler(async (req, res, next) => {
           }
         });
 
+        //console.log(itemExistingMap);
+
+
+
+        
 
         ////////////////////////////////////////////////////
         //console.log(itemPartNumbersMap);
@@ -276,7 +285,7 @@ exports.createInvoice = asyncHandler(async (req, res, next) => {
 
 
       } else {
-        resultList.push({hasInvoice: 'This package already has an invoice'});
+        resultList.push({hasInvoice: 'This package already has an invoice', package: packages[index]});
         //  console.log('has invoice');
       }
 
@@ -284,8 +293,8 @@ exports.createInvoice = asyncHandler(async (req, res, next) => {
 
 
     } else {
-      resultList.push({isAmazon: 'This package already has an amazon invoice'});
-       // console.log('amazon package ');
+      resultList.push({isAmazon: 'This package already has an amazon invoice', package: packages[index]});
+       console.log('amazon package ');
     }
 
 

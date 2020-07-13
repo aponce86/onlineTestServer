@@ -7,7 +7,10 @@ const Item = sequelize.define('Item', {
     status: DataTypes.STRING,
     cbm: DataTypes.NUMBER,
     insurance: DataTypes.NUMBER,
-    owner: DataTypes.NUMBER
+    owner: DataTypes.NUMBER,
+
+    updatedAt: DataTypes.TIME,
+    createdAt: DataTypes.TIME
 }, {
     tableName: 'item'
 });

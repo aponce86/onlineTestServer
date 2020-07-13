@@ -7,6 +7,9 @@ const Store = sequelize.define('Store', {
     },
     num: {
         type: DataTypes.NUMBER
+    },
+    updatedAt: {
+      type: DataTypes.TIME
     }
 }, {
     tableName: 'subsidiary'

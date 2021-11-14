@@ -10,7 +10,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader(
-      "Access-Control-Allow-Headers"
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type"
     );
     res.setHeader(
       "Access-Control-Allow-Methods",
@@ -20,5 +21,6 @@ app.use((req, res, next) => {
     next();
   });
 
+  app.use('/api/interview', interviewRoute);
 
 module.exports = app;

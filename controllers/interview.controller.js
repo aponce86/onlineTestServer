@@ -54,9 +54,7 @@ exports.getById = (req, res, next) => {
 
 exports.reviewQuestions = (req, res, next) => {
     
-    console.log("in review", req.body);
     let userAnswers = req.body;
-    console.log(userAnswers.answers);
     let correctAnsws = answers.find(answ => answ.id === userAnswers.id);
     let totalPoint = correctAnsws.value.length;
 
